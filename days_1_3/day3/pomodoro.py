@@ -22,24 +22,24 @@ class Pomodoro:
 
     def start_timer(self):
         while True:
-            print(f"Starting task: {self.current_task}")
+            print(f"{datetime.now()} Starting task: {self.current_task}")
             countdown(milliseconds=1500000)
             self.cycles_complete += 1
             self.start_break()
 
     def start_break(self):
         if self.cycles_complete < 4:
-            print("Time for a quick 5 minute break.")
+            print(f"{datetime.now()} Time for a quick 5 minute break.")
             countdown(milliseconds=300000)
         else:
-            print("Time for an extended, 20 minute break.")
+            print(f"{datetime.now()} Time for an extended, 20 minute break.")
             countdown(milliseconds=1200000)
             self.reset_timer()
 
     def reset_timer(self):
         self.cycles_complete = 0
-        user_input = input("Looks like you've completed four cycles. Would you like to (r)epeat this task, "
-                           "choose a (n)ew task, or (q)uit the timer?\n>>> ")
+        user_input = input(f"{datetime.now()} Looks like you have completed four cycles. Would you like to "
+                           "(r)epeat this task, choose a (n)ew task, or (q)uit the timer?\n>>> ")
         if user_input == "r":
             self.start_timer()
         elif user_input == "n":
