@@ -4,6 +4,7 @@
 from datetime import datetime
 from datetime import timedelta
 import sys
+from winsound import Beep
 
 
 def countdown(milliseconds):
@@ -17,6 +18,8 @@ def countdown(milliseconds):
 class Pomodoro:
     def __init__(self):
         self.cycles_complete = 0
+        self.beep_frequency = 2500
+        self.beep_duration = 250
         self.current_task = ""
         self.define_task()
 
@@ -28,6 +31,7 @@ class Pomodoro:
             self.start_break()
 
     def start_break(self):
+        Beep(self.beep_frequency, self.beep_duration)
         if self.cycles_complete < 4:
             print(f"{datetime.now()} Time for a quick 5 minute break.")
             countdown(milliseconds=300000)
