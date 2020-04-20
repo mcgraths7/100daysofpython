@@ -1,0 +1,93 @@
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+>>> numlist = [1, 2, 3, 4, 5]
+>>> numlist
+[1, 2, 3, 4, 5]
+>>> numlist.reverse()
+>>> numlist
+[5, 4, 3, 2, 1]
+>>> numlist.reverse()
+>>> mystring = 'steven'
+>>> list(mystring)
+['s', 't', 'e', 'v', 'e', 'n']
+>>> l = list(mystring)
+>>> l
+['s', 't', 'e', 'v', 'e', 'n']
+>>> l.pop()
+'n'
+>>> l.insert(-1, 'n')
+>>> l
+['s', 't', 'e', 'v', 'n', 'e']
+>>> l.pop()
+'e'
+>>> l.pop()
+'n'
+>>> l.insert(len(l),'e')
+>>> l.insert(len(l),'n')
+>>> l
+['s', 't', 'e', 'v', 'e', 'n']
+>>> l = list(mystring)
+>>> t = tuple(mystring)
+>>> l
+['s', 't', 'e', 'v', 'e', 'n']
+>>> t
+('s', 't', 'e', 'v', 'e', 'n')
+>>> l.pop()
+'n'
+>>> t.pop()
+Traceback (most recent call last):
+  File "<pyshell#22>", line 1, in <module>
+    t.pop()
+AttributeError: 'tuple' object has no attribute 'pop'
+>>> t[0] = 'l
+SyntaxError: EOL while scanning string literal
+>>> t[0] = 'l'
+Traceback (most recent call last):
+  File "<pyshell#24>", line 1, in <module>
+    t[0] = 'l'
+TypeError: 'tuple' object does not support item assignment
+>>> pybites = {'steven': 29, 'danbee': 27}
+>>> pybites['steven']
+29
+>>> sorted(pybites)
+['danbee', 'steven']
+>>> pybites
+{'steven': 29, 'danbee': 27}
+>>>  pybites
+ 
+SyntaxError: unexpected indent
+>>> pybites
+{'steven': 29, 'danbee': 27}
+>>> for p in pybytes.items():
+	print(type(p))
+
+	
+Traceback (most recent call last):
+  File "<pyshell#33>", line 1, in <module>
+    for p in pybytes.items():
+NameError: name 'pybytes' is not defined
+>>> pybites.items()
+dict_items([('steven', 29), ('danbee', 27)])
+>>> for p in pybites.items():
+	print(type(p))
+
+	
+<class 'tuple'>
+<class 'tuple'>
+>>> for k, v in pybytes.items():
+	print(f"{k}: {v}")
+
+	
+Traceback (most recent call last):
+  File "<pyshell#40>", line 1, in <module>
+    for k, v in pybytes.items():
+NameError: name 'pybytes' is not defined
+>>> for k, v in pybites.items()
+SyntaxError: invalid syntax
+>>> for k, v in pybites.items():
+	print(f"{k}: {v}")
+
+	
+steven: 29
+danbee: 27
+>>> 
