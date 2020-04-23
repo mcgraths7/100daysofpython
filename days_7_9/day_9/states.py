@@ -55,6 +55,16 @@ def get_state_abbrev(state_name, us_state_abbrev=us_state_abbrev):
     pass
 
 
+def assign_longest_state(state_list):
+    longest_state = ""
+    for state in state_list:
+        if len(state) > len(longest_state):
+            longest_state = state
+        else:
+            continue
+    return longest_state
+
+
 def get_longest_state(data):
     """Receives data, which can be the us_state_abbrev dict or the states
        list (see above). It returns the longest state measured by the length
@@ -62,18 +72,9 @@ def get_longest_state(data):
     # TODO - Fix below code to get rid of repeated code
     longest_state = ""
     if isinstance(data, dict):
-        for state in data.keys():
-            if len(state) > len(longest_state):
-                longest_state = state
-            else:
-                continue
+        return assign_longest_state(data.keys())
     elif isinstance(data, list):
-        for state in data:
-            if len(state) > len(longest_state):
-                longest_state = state
-            else:
-                continue
-    return longest_state
+        return assign_longest_state(data)
     pass
 
 
@@ -96,4 +97,4 @@ def combine_state_names_and_abbreviations(us_state_abbrev=us_state_abbrev,
 # print(get_state_abbrev('Puerto Rico'))
 # print(get_longest_state(us_state_abbrev))
 # print(get_longest_state(states))
-print(combine_state_names_and_abbreviations())
+# print(combine_state_names_and_abbreviations())
