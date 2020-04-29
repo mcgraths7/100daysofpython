@@ -23,7 +23,9 @@ class Pomodoro:
         self.current_task = ""
         self.define_task()
 
-    def start_timer(self):
+    def __call__(self):
+        """Entry point for the app, gets called when run from the command line"""
+
         while True:
             print(f"{datetime.now()} Starting task: {self.current_task}")
             countdown(milliseconds=1500000)
@@ -45,10 +47,10 @@ class Pomodoro:
         user_input = input(f"{datetime.now()} Looks like you have completed four cycles. Would you like to "
                            "(r)epeat this task, choose a (n)ew task, or (q)uit the timer?\n>>> ")
         if user_input == "r":
-            self.start_timer()
+            self.__call__()
         elif user_input == "n":
             self.define_task()
-            self.start_timer()
+            self.__call__()
         elif user_input == "q":
             sys.exit()
         else:
@@ -59,5 +61,6 @@ class Pomodoro:
         self.current_task = input("Please let me know what your current task is...\n>>> ")
 
 
-pom = Pomodoro()
-pom.start_timer()
+if __name__ == '__main__':
+    pomodoro = Pomodoro()
+    pomodoro()

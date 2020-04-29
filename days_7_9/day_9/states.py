@@ -91,10 +91,10 @@ def combine_state_names_and_abbreviations(us_state_abbrev=us_state_abbrev,
     return first_ten_abbreviations + last_ten_abbreviations
     pass
 
-# print(get_every_nth_state())
+# print(get_every_nth_state(n=3))
 # print(get_state_abbrev('Alabama'))
 # print(get_state_abbrev('Wyoming'))
 # print(get_state_abbrev('Puerto Rico'))
 # print(get_longest_state(us_state_abbrev))
 # print(get_longest_state(states))
-# print(combine_state_names_and_abbreviations())
+print(combine_state_names_and_abbreviations())
