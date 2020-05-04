@@ -29,13 +29,13 @@ def get_current_throw():
 
 def get_winning_text(throw1: Throw, throw2: Throw):
     winning_throws = throw1.get_winning_throws()
-    losing_throws = throw1.get_losing_throws()
+    losing_throws = throw2.get_winning_throws()
     for winning_throw in winning_throws:
         if throw2.name in winning_throw.keys():
             return {'victory': True, 'text': winning_throw[throw2.name]}
     for losing_throw in losing_throws:
-        if throw2.name in losing_throw.keys():
-            return {'victory': False, 'text': losing_throw[throw2.name]}
+        if throw1.name in losing_throw.keys():
+            return {'victory': False, 'text': losing_throw[throw1.name]}
     return {'victory': False, 'text': None}
 
 
@@ -62,7 +62,6 @@ def game_loop(player1: Player, player2: Player, num_rounds: int, possible_throws
             print(ve)
             continue
         cpu_throw = Throw(random.choice(possible_throws))
-        winning_throws = player_throw.get_winning_throws()
         print(f"You chose {player_throw.name}")
         print(f"Your opponent chose {cpu_throw.name}")
 
