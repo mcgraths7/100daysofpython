@@ -36,7 +36,7 @@ def get_winning_text(throw1: Throw, throw2: Throw):
     for losing_throw in losing_throws:
         if throw2.name in losing_throw.keys():
             return {'victory': False, 'text': losing_throw[throw2.name]}
-    return {'victory': None, 'text': None}
+    return {'victory': False, 'text': None}
 
 
 def game_loop(player1: Player, player2: Player, num_rounds: int, possible_throws: list):
@@ -67,19 +67,19 @@ def game_loop(player1: Player, player2: Player, num_rounds: int, possible_throws
         print(f"Your opponent chose {cpu_throw.name}")
 
         winning_text = get_winning_text(player_throw, cpu_throw)
-        if winning_text['victory']:
+        if not winning_text['victory'] and winning_text['text'] is None:
+            print("It's a tie! Throw again")
+            continue
+        elif winning_text['victory']:
             print(f"Your {player_throw.name} {winning_text['text']} opponent's {cpu_throw.name}."
                   f" You've won this round!")
             player1.rounds_won += 1
             current_round += 1
         elif not winning_text['victory']:
             print(f"Your opponent's {cpu_throw.name} {winning_text['text']} your {player_throw.name}. "
-                  f"Unfortunately you've lose this round!")
+                  f"Unfortunately you've lost this round!")
             player2.rounds_won += 1
             current_round += 1
-        else:
-            print("It's a tie! Throw again.")
-            continue
 
         if player1.rounds_won == rounds_to_win:
             print(f"You've won {rounds_to_win} rounds! You've won the match!")
