@@ -30,13 +30,16 @@ def get_current_throw():
 def get_winning_text(throw1: Throw, throw2: Throw):
     winning_throws = throw1.get_winning_throws()
     losing_throws = throw2.get_winning_throws()
-    for winning_throw in winning_throws:
-        if throw2.name in winning_throw.keys():
-            return {'victory': True, 'text': winning_throw[throw2.name]}
-    for losing_throw in losing_throws:
-        if throw1.name in losing_throw.keys():
-            return {'victory': False, 'text': losing_throw[throw1.name]}
-    return {'victory': False, 'text': None}
+    win = [winning_throw[throw2.name] for winning_throw in winning_throws if throw2.name in winning_throw.keys()]
+    # for winning_throw in winning_throws:
+    #     if throw2.name in winning_throw.keys():
+    #         return {'victory': True, 'text': winning_throw[throw2.name]}
+    lose = [losing_throw[throw1.name] for losing_throw in losing_throws if throw1.name in losing_throw.keys()]
+    # for losing_throw in losing_throws:
+    #     if throw1.name in losing_throw.keys():
+    #         return {'victory': False, 'text': losing_throw[throw1.name]}
+    # return {'victory': False, 'text': None}
+    return win, lose
 
 
 def game_loop(player1: Player, player2: Player, num_rounds: int, possible_throws: list):
@@ -66,19 +69,22 @@ def game_loop(player1: Player, player2: Player, num_rounds: int, possible_throws
         print(f"Your opponent chose {cpu_throw.name}")
 
         winning_text = get_winning_text(player_throw, cpu_throw)
-        if not winning_text['victory'] and winning_text['text'] is None:
-            print("It's a tie! Throw again")
-            continue
-        elif winning_text['victory']:
-            print(f"Your {player_throw.name} {winning_text['text']} opponent's {cpu_throw.name}."
+        if winning_text[0] and not winning_text[1]:
+            print(f"Your {player_throw.name} {winning_text[0][0]} opponent's {cpu_throw.name}."
                   f" You've won this round!")
             player1.rounds_won += 1
             current_round += 1
-        elif not winning_text['victory']:
-            print(f"Your opponent's {cpu_throw.name} {winning_text['text']} your {player_throw.name}. "
+        elif winning_text[1] and not winning_text[0]:
+            print(f"Your opponent's {cpu_throw.name} {winning_text[1][0]} your {player_throw.name}. "
                   f"Unfortunately you've lost this round!")
             player2.rounds_won += 1
             current_round += 1
+        elif not winning_text[0] and not winning_text[1]:
+            print("It's a tie, throw again!")
+            continue
+        else:
+            print("Something went wrong... Next round!")
+            continue
 
         if player1.rounds_won == rounds_to_win:
             print(f"You've won {rounds_to_win} rounds! You've won the match!")
