@@ -31,14 +31,7 @@ def get_winning_text(throw1: Throw, throw2: Throw):
     winning_throws = throw1.get_winning_throws()
     losing_throws = throw2.get_winning_throws()
     win = [winning_throw[throw2.name] for winning_throw in winning_throws if throw2.name in winning_throw.keys()]
-    # for winning_throw in winning_throws:
-    #     if throw2.name in winning_throw.keys():
-    #         return {'victory': True, 'text': winning_throw[throw2.name]}
     lose = [losing_throw[throw1.name] for losing_throw in losing_throws if throw1.name in losing_throw.keys()]
-    # for losing_throw in losing_throws:
-    #     if throw1.name in losing_throw.keys():
-    #         return {'victory': False, 'text': losing_throw[throw1.name]}
-    # return {'victory': False, 'text': None}
     return win, lose
 
 
