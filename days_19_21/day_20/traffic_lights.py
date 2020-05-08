@@ -3,7 +3,7 @@ from time import sleep
 from sys import stdout
 
 
-COLORS = cycle(['RED', 'AMBER', 'GREEN'])
+COLORS = cycle(['GREEN', 'AMBER', 'RED'])
 
 
 def change_color(colors=COLORS, speed_limit=20):
