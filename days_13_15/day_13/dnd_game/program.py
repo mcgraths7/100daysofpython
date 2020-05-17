@@ -29,7 +29,6 @@ def game_loop():
     creature_location = random.choice(scenes.get(current_scene))
     print(f"You find yourself in a {current_scene.lower()}")
     while True:
-
         print(f"A level {selected_creature.level} {selected_creature.name} has appeared from {creature_location}\n")
         cmd = input("Do you: [a]ttack, [r]un away, or [l]ook around?\n")
         if cmd == 'a' or cmd == 'attack':

@@ -1,5 +1,6 @@
 import itertools
 import os
+import sys
 import urllib.request
 
 # PREWORK
@@ -25,6 +26,10 @@ with open(DICTIONARY) as f:
 
 
 def get_max_word_value(draw):
+    if len(draw) > 7:
+        raise ValueError('Too many letters')
+    elif len(draw) == 0:
+        raise ValueError('Need at least one letter')
     current_max_value = 0
     max_value_word = ""
     words = _get_possible_dict_words(draw)
@@ -33,7 +38,10 @@ def get_max_word_value(draw):
         if value > current_max_value:
             current_max_value = value
             max_value_word = word
-    return {'word': max_value_word, 'value': current_max_value}
+    try:
+        return {'word': max_value_word, 'value': current_max_value}
+    except ValueError as ve:
+        print(ve)
 
 
 # Below are helper methods
@@ -82,4 +90,12 @@ def _get_permutations_n_letters(draw, n):
     return ["".join(comb) for comb in list(itertools.permutations(draw, n))]
 
 
-print(get_max_word_value(['A', 'E' 'B', 'Y', 'P', 'D', 'M']))
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        raise IndexError('Need at least one letter')
+    else:
+        try:
+            max_value = get_max_word_value(list(sys.argv[1]))
+        except IndexError as ie:
+            print(ie)
+        print(max_value)

@@ -1,9 +1,8 @@
 import random
 import math
 
-
-from days_13_15.day_15.player import Player
-from days_13_15.day_15.throw import Throw
+from player import Player
+from throw import Throw
 
 
 def print_header():
