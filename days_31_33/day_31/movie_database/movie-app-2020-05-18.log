@@ -1,0 +1,16 @@
+[2020-05-18 14:09:29.678496] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: movie-app.log
+[2020-05-18 14:09:31.977213] TRACE: API: Starting search for Cat...
+[2020-05-18 14:09:32.217218] TRACE: API: Request complete. Status code 200
+[2020-05-18 14:09:32.217218] TRACE: API: Search for Cat complete. 10 movies found. The search took 240 ms
+[2020-05-18 14:09:41.687137] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: movie-app.log
+[2020-05-18 14:09:43.947099] TRACE: API: Starting search for Avengers...
+[2020-05-18 14:09:44.127333] TRACE: API: Request complete. Status code 200
+[2020-05-18 14:09:44.157425] TRACE: API: Search for Avengers complete. 2 movies found. The search took 210 ms
+[2020-05-18 14:10:59.581616] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: movie-app.log
+[2020-05-18 14:11:00.645121] TRACE: API: Starting search for ...
+[2020-05-18 14:11:00.645121] WARNING: API: No keyword supplied
+[2020-05-18 14:11:00.645121] WARNING: Application: Oops! You need to specify a search term!
+[2020-05-18 14:11:20.939447] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: movie-app.log
+[2020-05-18 14:11:21.727075] TRACE: API: Starting search for ...
+[2020-05-18 14:11:21.727075] WARNING: API: No keyword supplied
+[2020-05-18 14:11:21.727075] WARNING: Application: Oops! You need to specify a search term!

@@ -2,6 +2,11 @@ import itertools
 import os
 import sys
 import urllib.request
+import logbook
+
+scrabble_logs = logbook.Logger('Scrabble Helper')
+logbook.set_datetime_format("local")
+
 
 # PREWORK
 TMP = os.getenv("TMP", "/tmp")
@@ -16,10 +21,13 @@ LETTER_VALUES = {
     8: 'J X',
     10: 'Q Z'
 }
+
+
 urllib.request.urlretrieve(
     f'https://bites-data.s3.us-east-2.amazonaws.com/{DICT}',
     DICTIONARY
 )
+
 
 with open(DICTIONARY) as f:
     dictionary = set([word.strip().lower() for word in f.read().split()])
@@ -33,14 +41,17 @@ def get_max_word_value(draw):
     current_max_value = 0
     max_value_word = ""
     words = _get_possible_dict_words(draw)
+    scrabble_logs.trace(f"Calculating max value word for draw {draw}")
     for word in words:
         value = _get_word_value(word)
         if value > current_max_value:
             current_max_value = value
             max_value_word = word
     try:
+        scrabble_logs.trace(f"The highest scoring word for draw {draw} is {max_value_word} worth {current_max_value} points")
         return {'word': max_value_word, 'value': current_max_value}
     except ValueError as ve:
+        scrabble_logs.error("A problem occurred: " + str(ve))
         print(ve)
 
 
@@ -51,7 +62,10 @@ def _get_possible_dict_words(draw):
        valid dictionary words. Use _get_permutations_draw and provided
        dictionary"""
     permutations = _get_permutations_draw(draw)
-    return [word.lower() for word in permutations if word.lower() in dictionary]
+    scrabble_logs.trace(f"Getting possible dictionary words from permutations...")
+    words = [word.lower() for word in permutations if word.lower() in dictionary]
+    scrabble_logs.trace(f"Matched {len(words)} dictionary words.")
+    return words
     pass
 
 
@@ -66,8 +80,10 @@ def _get_permutations_draw(draw):
     six_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 6))]
     seven_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 7))]
     perms = []
+    scrabble_logs.trace(f"Generating possible permutations for draw {draw}...")
     for n in range(1, 8):
         perms = perms + _get_permutations_n_letters(draw, n)
+    scrabble_logs.trace(f"{len(perms)} possible permutations.")
     return perms
     pass
 
@@ -90,8 +106,23 @@ def _get_permutations_n_letters(draw, n):
     return ["".join(comb) for comb in list(itertools.permutations(draw, n))]
 
 
+def init_logging(filename: str= None):
+    level = logbook.TRACE
+    if filename:
+        logbook.TimedRotatingFileHandler(filename=filename, level=level).push_application()
+    else:
+        logbook.StreamHandler(sys.stdout, level=level).push_application()
+
+    msg = f'Logging initialized, level: {level}, mode: {"stdout mode" if not filename else "file mode: " + filename}'
+    logger = logbook.Logger('Startup')
+    logger.notice(msg)
+
+
 if __name__ == '__main__':
+    init_logging(filename="scrabble.log")
+    # init_logging()
     if len(sys.argv) == 1:
+        scrabble_logs.warn("Need to specify at least one letter.")
         raise IndexError('Need at least one letter')
     else:
         try:
