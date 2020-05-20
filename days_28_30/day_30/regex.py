@@ -33,7 +33,6 @@ def get_all_hashtags_and_links(tweet=TWEET):
         '#APIs']
        Return this list.
     """
-
     # Need to capture #anything as well as http://anything.domain
     hash_pattern = re.compile(r'#\w+')
     url_pattern = re.compile(r'\bhttps?://(www\.)?[A-Za-z0-9-]+(\.[a-z]+)+(/[A-Za-z0-9-]+)*(\.[a-z]+)?\b')
@@ -55,10 +54,3 @@ def match_first_paragraph(html=HTML):
     paragraph_pattern = re.compile(r'(?<=<p>)[\w\W]+?(?=</p>)')
     return paragraph_pattern.search(html).group(0)
     pass
-
-
-print(extract_course_times())
-
-print(get_all_hashtags_and_links())
-
-print(match_first_paragraph())
