@@ -38,21 +38,16 @@ def get_max_word_value(draw):
         raise ValueError('Too many letters')
     elif len(draw) == 0:
         raise ValueError('Need at least one letter')
-    current_max_value = 0
-    max_value_word = ""
     words = _get_possible_dict_words(draw)
     scrabble_logs.trace(f"Calculating max value word for draw {draw}")
-    words_with_values = dict([word, _get_word_value(word) for word in words])
-    print(words_with_values)
-    # for word in words:
-    #     value = _get_word_value(word)
-    #     if value > current_max_value:
-    #         current_max_value = value
-    #         max_value_word = word
+    words_with_values = {word: _get_word_value(word) for word in words}
     try:
-        # scrabble_logs.trace(f"The highest scoring word for draw {draw} is {max_value_word} worth {current_max_value} points")
-        scrabble_logs.trace(f"The highest scoring word for draw {draw} is {max_value_word} worth {current_max_value} points")
-        return {'word': max_value_word, 'value': current_max_value}
+
+        max_value_word = max(words_with_values, key=lambda x: words_with_values[x])
+        max_value = words_with_values[max_value_word]
+        scrabble_logs.trace(f"The highest scoring word for draw {draw} is {max_value_word} "
+                            f"worth {max_value} points")
+        return {'word': max_value_word, 'value': max_value}
     except ValueError as ve:
         scrabble_logs.error("A problem occurred: " + str(ve))
         print(ve)
@@ -75,6 +70,7 @@ def _get_possible_dict_words(draw):
 def _get_permutations_draw(draw):
     """Helper to get all permutations of a draw (list of letters), hint:
        use itertools.permutations (order of letters matters)"""
+    scrabble_logs.trace(f"Generating possible permutations for draw {draw}...")
     one_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 1))]
     two_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 2))]
     three_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 3))]
@@ -82,27 +78,18 @@ def _get_permutations_draw(draw):
     five_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 5))]
     six_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 6))]
     seven_letter = ["".join(comb) for comb in list(itertools.permutations(draw, 7))]
-    perms = []
-    scrabble_logs.trace(f"Generating possible permutations for draw {draw}...")
-    for n in range(1, 8):
-        perms = perms + _get_permutations_n_letters(draw, n)
+    perms = list(one_letter + two_letter + three_letter + four_letter + five_letter + six_letter + seven_letter)
     scrabble_logs.trace(f"{len(perms)} possible permutations.")
     return perms
     pass
 
 
 def _get_letter_value(letter):
-    for value, letters in LETTER_VALUES.items():
-        if letter.upper() in letters.split():
-            return value
+    return [value for value, letters in LETTER_VALUES.items() if letter.upper() in letters.split()][0]
 
 
 def _get_word_value(word):
-    total_value = 0
-    for letter in list(word):
-        value = _get_letter_value(letter)
-        total_value += value
-    return total_value
+    return sum([_get_letter_value(letter) for letter in list(word)])
 
 
 def _get_permutations_n_letters(draw, n):
