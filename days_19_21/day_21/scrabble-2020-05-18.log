@@ -23,3 +23,11 @@
 [2020-05-18 15:12:03.684426] TRACE: Scrabble Helper: Matched 45 dictionary words.
 [2020-05-18 15:12:03.684426] TRACE: Scrabble Helper: Calculating max value word for draw ['D', 'J', 'O', 'Q', 'M', 'U', 'L']
 [2020-05-18 15:12:03.684426] TRACE: Scrabble Helper: The highest scoring word for draw ['D', 'J', 'O', 'Q', 'M', 'U', 'L'] is quod worth 14 points
+[2020-05-18 15:24:51.281034] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: scrabble.log
+[2020-05-18 15:24:51.281034] WARNING: Scrabble Helper: Need to specify at least one letter.
+[2020-05-18 15:25:54.309270] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: scrabble.log
+[2020-05-18 15:25:54.309270] WARNING: Scrabble Helper: list index out of range
+[2020-05-18 15:26:16.922212] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: scrabble.log
+[2020-05-18 15:26:16.922212] WARNING: Scrabble Helper: list index out of range
+[2020-05-18 15:26:49.501511] NOTICE: Startup: Logging initialized, level: 9, mode: file mode: scrabble.log
+[2020-05-18 15:26:49.501511] WARNING: Scrabble Helper: Need to specify at least one letter

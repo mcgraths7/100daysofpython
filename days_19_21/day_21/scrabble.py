@@ -42,12 +42,15 @@ def get_max_word_value(draw):
     max_value_word = ""
     words = _get_possible_dict_words(draw)
     scrabble_logs.trace(f"Calculating max value word for draw {draw}")
-    for word in words:
-        value = _get_word_value(word)
-        if value > current_max_value:
-            current_max_value = value
-            max_value_word = word
+    words_with_values = dict([word, _get_word_value(word) for word in words])
+    print(words_with_values)
+    # for word in words:
+    #     value = _get_word_value(word)
+    #     if value > current_max_value:
+    #         current_max_value = value
+    #         max_value_word = word
     try:
+        # scrabble_logs.trace(f"The highest scoring word for draw {draw} is {max_value_word} worth {current_max_value} points")
         scrabble_logs.trace(f"The highest scoring word for draw {draw} is {max_value_word} worth {current_max_value} points")
         return {'word': max_value_word, 'value': current_max_value}
     except ValueError as ve:
@@ -120,13 +123,9 @@ def init_logging(filename: str= None):
 
 if __name__ == '__main__':
     init_logging(filename="scrabble.log")
-    # init_logging()
-    if len(sys.argv) == 1:
-        scrabble_logs.warn("Need to specify at least one letter.")
-        raise IndexError('Need at least one letter')
-    else:
-        try:
-            max_value = get_max_word_value(list(sys.argv[1]))
-        except IndexError as ie:
-            print(ie)
+    try:
+        max_value = get_max_word_value(list(sys.argv[1]))
         print(max_value)
+    except IndexError as ie:
+        scrabble_logs.warn("Need to specify at least one letter")
+        print("Need to specify at least one letter")

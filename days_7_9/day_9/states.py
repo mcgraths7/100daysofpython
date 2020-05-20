@@ -69,7 +69,6 @@ def get_longest_state(data):
     """Receives data, which can be the us_state_abbrev dict or the states
        list (see above). It returns the longest state measured by the length
        of the string"""
-    # TODO - Fix below code to get rid of repeated code
     longest_state = ""
     if isinstance(data, dict):
         return assign_longest_state(data.keys())

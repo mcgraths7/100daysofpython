@@ -5,7 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/days_13_15/day_15" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/days_31_33/day_31/movie_database" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (100daysofcode)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (100daysofcode)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="days_34_36" />
   </component>
 </module>
