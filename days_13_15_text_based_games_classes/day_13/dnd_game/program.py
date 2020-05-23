@@ -1,4 +1,4 @@
-from days_13_15.day_13.dnd_game.actors import Creature, Tiger, RatKing, Wizard
+from days_13_15_text_based_games_classes.day_13.dnd_game.actors import Creature, Tiger, RatKing, Wizard
 import random
 
 

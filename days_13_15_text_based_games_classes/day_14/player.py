@@ -1,4 +1,4 @@
-from days_13_15.day_14.throw import Throw
+from days_13_15_text_based_games_classes.day_14.throw import Throw
 
 
 class Player:
