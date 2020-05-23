@@ -42,10 +42,10 @@ def create_candy_from_row(row) -> Candy:
     return c
 
 
-def get_candy_by_descriptor(descriptor: str, candy_list=None) -> List[Candy]:
+def get_candy_by_descriptor(descriptor: str, candy_list=None, value=1) -> List[Candy]:
     if candy_list is None:
         candy_list = data
-    return [candy for candy in candy_list if _convert_candy_to_dict(candy)[descriptor] == 1]
+    return [candy for candy in candy_list if _convert_candy_to_dict(candy)[descriptor] == value]
 
 
 def sort_matched_candy_by(sortable: str, matched_candy: List[Candy]) -> List[Candy]:
@@ -54,7 +54,9 @@ def sort_matched_candy_by(sortable: str, matched_candy: List[Candy]) -> List[Can
 
 def get_top_five_candy(matched_candy: List[Candy]) -> List[Candy]:
     return matched_candy[:5]
+
 # Helper methods
+
 
 def _convert_candy_to_dict(candy: Candy) -> dict:
     return candy._asdict()
