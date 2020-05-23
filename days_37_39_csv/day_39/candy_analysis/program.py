@@ -51,7 +51,6 @@ class CandyMatcher:
             print("Unfortunately, it seems no candy in our database matches your preference.")
 
     def _get_matched_candy(self):
-        # TODO: try to consolidate into list comprehension
         for idx, cat in enumerate(self.categories):
             if idx == 0:
                 self.matched_candy = research.get_candy_by_descriptor(cat)
