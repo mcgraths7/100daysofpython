@@ -1,3 +1,0 @@
-namedlist~=1.7
-requests~=2.23.0
-Logbook~=1.5.3
