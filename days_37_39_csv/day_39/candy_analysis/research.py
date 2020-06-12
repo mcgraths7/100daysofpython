@@ -6,11 +6,12 @@ from typing import List
 
 data = []
 Candy = namedtuple('Candy', 'competitorname,chocolate,fruity,caramel,peanutyalmondy,'
-                            'nougat,crispedricewafer,hard,bar,pluribus,sugarpercent,'
-                            'pricepercent,winpercent')
+                            'nougat,crispedricewafer,hard,bar,pluribus,winpercent')
 
 
 def init():
+    if data:
+        return
     folder = os.path.dirname(__file__)
     file_path = os.path.join(folder, 'data', 'candy-data.csv')
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -32,12 +33,22 @@ def create_candy_from_row(row) -> Candy:
     row['hard'] = int(row['hard'])
     row['bar'] = int(row['bar'])
     row['pluribus'] = int(row['pluribus'])
-    row['sugarpercent'] = float(row['sugarpercent'])
-    row['pricepercent'] = float(row['pricepercent'])
+    # row['sugarpercent'] = float(row['sugarpercent'])
+    # row['pricepercent'] = float(row['pricepercent'])
     row['winpercent'] = float(row['winpercent'])
 
     c = Candy(
-        **row
+        competitorname=row.get('competitorname'),
+        chocolate=row.get('chocolate'),
+        fruity=row.get('fruity'),
+        caramel=row.get('caramel'),
+        peanutyalmondy=row.get('peanutyalmondy'),
+        nougat=row.get('nougat'),
+        crispedricewafer=row.get('crispedricewafer'),
+        hard=row.get('hard'),
+        bar=row.get('bar'),
+        pluribus=row.get('pluribus'),
+        winpercent=row.get('winpercent')
     )
     return c
 
